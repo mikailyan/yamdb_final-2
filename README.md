@@ -2,4 +2,4 @@
 
 yamdb_final
 
-https://github.com/YourKeysAreMine/yamdb_final/actions/workflows/yamdb_workflow.yml/badge.svg
+!(https://github.com/YourKeysAreMine/yamdb_final/actions/workflows/yamdb_workflow.yml/badge.svg)
