@@ -1,5 +1,4 @@
 from django.core.validators import MaxValueValidator, MinValueValidator
-
 from rest_framework import serializers
 from reviews.models import Category, Comment, Genre, Review, Title, User
 from users.validators import validate_name
@@ -69,8 +68,7 @@ class TitleGETSerializer(serializers.ModelSerializer):
         total_scores = [review.score for review in reviews]
         if not total_scores:
             return None
-        rating = round(sum(total_scores) / len(total_scores))
-        return rating
+        return round(sum(total_scores) / len(total_scores))
 
 
 class TitlePOSTSerializer(TitleGETSerializer):

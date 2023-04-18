@@ -1,16 +1,14 @@
-from django.conf import settings
-from django.core.mail import send_mail
-from django.shortcuts import get_object_or_404
-from django.db.models import Avg
-
+from api.confirmation_code import generate_confirmation_code
 from api.filters import TitleFilter
-from api.permissions import (IsAuthorAdminModeratorOrReadOnly,
-                             IsAdminOrReadOnly,
-                             )
+from api.permissions import IsAdminOrReadOnly, IsAuthorAdminModeratorOrReadOnly
 from api.serializers import (CategorySerializer, CommentSerializer,
                              GenreSerializer, RegistrationSerializer,
                              ReviewSerializer, TitleGETSerializer,
                              TitlePOSTSerializer, TokenSerializer)
+from django.conf import settings
+from django.core.mail import send_mail
+from django.db.models import Avg
+from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters, mixins, status, views, viewsets
 from rest_framework.permissions import AllowAny
@@ -18,7 +16,6 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from reviews.models import Category, Genre, Review, Title
 from users.models import User
-from api.confirmation_code import generate_confirmation_code
 
 
 class CommentViewSet(viewsets.ModelViewSet):
@@ -27,13 +24,11 @@ class CommentViewSet(viewsets.ModelViewSet):
 
     def get_review(self, key):
         review_id = self.kwargs.get(key)
-        review = get_object_or_404(Review, id=review_id)
-        return review
+        return get_object_or_404(Review, id=review_id)
 
     def get_queryset(self):
         review = self.get_review('review_id')
-        new_queryset = review.comments.all()
-        return new_queryset
+        return review.comments.all()
 
     def perform_create(self, serializer):
         review = self.get_review('review_id')
@@ -46,13 +41,11 @@ class ReviewViewSet(viewsets.ModelViewSet):
 
     def get_title(self, key):
         title_id = self.kwargs.get(key)
-        title = get_object_or_404(Title, id=title_id)
-        return title
+        return get_object_or_404(Title, id=title_id)
 
     def get_queryset(self):
         title = self.get_title('title_id')
-        new_queryset = title.reviews.all()
-        return new_queryset
+        return title.reviews.all()
 
     def perform_create(self, serializer):
         title = self.get_title('title_id')
