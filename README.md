@@ -46,7 +46,7 @@ python manage.py runserver
 ### IP сервера: 158.160.55.118 
 
 ### Авторы
-- Закиров Сергей
+- Закиров Сергей 
 - bifrostcmd
 - VldslMr
 
