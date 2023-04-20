@@ -2,10 +2,7 @@ version: '3.8'
 
 services:
   db:
-    restart: always
     image: postgres:13.0-alpine
-    ports:
-      - "5432:5432"
     volumes:
       - yamdb_database:/var/lib/postgresql/data/
     env_file:
